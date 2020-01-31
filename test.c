@@ -13,7 +13,12 @@ int main(int argc, char **argv) {
 	uuid_generate_random(uuid);
 	uuid_unparse(uuid, str);
 
-	printf("generated = %s\n", str);
+	printf("generated1 = %s\n", str);
+
+	uuid_generate_random(uuid);
+	uuid_unparse(uuid, str);
+
+	printf("generated2 = %s\n", str);
 
 	uuid_copy(copy, uuid);
 	uuid_unparse(copy, str);

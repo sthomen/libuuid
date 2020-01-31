@@ -8,8 +8,12 @@ const unsigned char hex[16]={'0', '1', '2', '3', '4', '5', '6', '7', '8', '9', '
 
 void uuid_generate_random(uuid_t out) {
 	int i, j, rnd;
+	static int seeded = 0;
 
-	srand(time(NULL));
+	if (!seeded) {
+		srand(time(NULL));
+		seeded=1;
+	}
 
 	for (i=0;i<(16/RAND_LENGTH);i++) {
 		rnd = rand();
