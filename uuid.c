@@ -4,6 +4,8 @@
 #include "uuid.h"
 #include "config.h"
 
+const unsigned char hex[16]={'0', '1', '2', '3', '4', '5', '6', '7', '8', '9', 'a', 'b', 'c', 'd', 'e', 'f'};
+
 void uuid_generate_random(uuid_t out) {
 	int i, j, rnd;
 
@@ -18,8 +20,35 @@ void uuid_generate_random(uuid_t out) {
 	}
 }
 
+void uuid_parse(const char *in, uuid_t uuid) {
+	int i, j;
+
+	i=j=0;
+
+	do {
+		switch (in[i]) {
+			case '-':
+				break;
+			default:
+				uuid[j++]=(_hex2dec(in[i++]) << 4) | _hex2dec(in[i]);
+		}
+
+		i++;
+	} while (j < 16 && i < 36);
+}
+
+int _hex2dec(char c) {
+	int i;
+
+	for (i=0;i<16;i++) {
+		if (hex[i] == c)
+			return i;
+	}
+
+	return -1;
+}
+
 void uuid_unparse(const uuid_t uuid, char *out) {
-	const unsigned char hex[16]={'0', '1', '2', '3', '4', '5', '6', '7', '8', '9', 'a', 'b', 'c', 'd', 'e', 'f'};
 	int i, j;
 
 	i=j=0;
@@ -48,3 +77,4 @@ void uuid_copy(uuid_t dst, const uuid_t src) {
 		dst[i]=src[i];
 	}
 }
+

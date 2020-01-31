@@ -15,3 +15,4 @@ Currently implemented:
 - uuid\_generate (macro of uuid\_generate\_random)
 - uuid\_unparse
 - uuid\_copy
+- uuid\_parse
