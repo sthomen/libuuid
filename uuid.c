@@ -24,6 +24,17 @@ void uuid_generate_random(uuid_t out) {
 	}
 }
 
+int _hex2dec(char c) {
+	int i;
+
+	for (i=0;i<16;i++) {
+		if (hex[i] == c)
+			return i;
+	}
+
+	return -1;
+}
+
 void uuid_parse(const char *in, uuid_t uuid) {
 	int i, j;
 
@@ -39,17 +50,6 @@ void uuid_parse(const char *in, uuid_t uuid) {
 
 		i++;
 	} while (j < 16 && i < 36);
-}
-
-int _hex2dec(char c) {
-	int i;
-
-	for (i=0;i<16;i++) {
-		if (hex[i] == c)
-			return i;
-	}
-
-	return -1;
 }
 
 void uuid_unparse(const uuid_t uuid, char *out) {
