@@ -4,7 +4,7 @@
 include version.mk
 
 RM?=rm -f
-LN?=ln -s
+LN?=ln -sf
 
 CC?=cc
 CFLAGS?=
