@@ -19,7 +19,7 @@ void uuid_generate_random(uuid_t out) {
 		rnd = rand();
 
 		for (j=0;j<RAND_LENGTH;j++) {
-			out[i+j+i] = (0xff & rnd >> (8*j));
+			out[i*RAND_LENGTH+j] = (0xff & rnd >> (8*j));
 		}
 	}
 
