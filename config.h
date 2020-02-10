@@ -4,7 +4,7 @@
 #ifdef __sgi
 #define RAND_LENGTH 2
 #else
-#warn "Unknown platform, assuming 4 bytes of randomness from rand()"
+#warning "Unknown platform, assuming 4 bytes of randomness from rand()"
 #define RAND_LENGTH 4
 #endif
 
