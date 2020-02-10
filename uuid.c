@@ -22,6 +22,12 @@ void uuid_generate_random(uuid_t out) {
 			out[i+j+i] = (0xff & rnd >> (8*j));
 		}
 	}
+
+	// set the version to 4
+	out[6] = (out[7] & 0x0f) | 0x40;
+
+	// set the variant to 1 (a)
+	out[8] = (out[9] & 0x0f) | 0xa0;
 }
 
 int _hex2dec(char c) {
