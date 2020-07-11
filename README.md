@@ -16,3 +16,26 @@ Currently implemented:
 - uuid\_unparse
 - uuid\_copy
 - uuid\_parse
+
+Building
+--------
+
+Normally it should be the usual
+
+```
+$ make
+# make install
+```
+
+..but on some platforms you may need to explicitly add CFLAGS=-fPIC
+
+The Makefile allows you to override RM, LD, CC, CFLAGS, LDFLAGS, INSTALL, LIB\_SUFFIX and of course PREFIX
+to change build/install parameters.
+
+Testing
+-------
+
+libuuid now uses cmocka for testing, use `make test` to compile and run the unit tests.
+
+Available make flags are CMOCKA\_LDFLAGS and CMOCKA\_CFLAGS to locate the include and lib files. In the future
+this may be replaced by pkg-config.
