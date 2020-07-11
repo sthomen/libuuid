@@ -7,8 +7,6 @@ RM?=rm -f
 LN?=ln -sf
 
 CC?=cc
-CFLAGS?=
-LDFLAGS?=
 
 PREFIX?=/usr/local
 
@@ -42,27 +40,25 @@ install: $(LIB)
 	$(INSTALL) -d $(PREFIX)/include/uuid
 	$(INSTALL) $(LIB_HEADERS) $(PREFIX)/include/uuid
 
-# test program
+# test
 
-TEST=test
-TEST_SRCS=test.c
-TEST_LIBS=-Wl,-rpath,. -L. -luuid
+TEST_CFLAGS?=$(CFLAGS) -I.
+TEST_LDFLAGS?=-L. -Wl,-rpath,. -luuid
 
-TEST_OBJS=$(TEST_SRCS:S/.c/.o/)
+CMOCKA_CFLAGS?=-I/usr/pkg/include
+CMOCKA_LDFLAGS?=-L/usr/pkg/lib -Wl,-rpath,/usr/pkg/lib -lcmocka
 
-$(TEST): $(LIB) $(TEST_OBJS)
-	$(CC) $(CFLAGS) -o $@ $(TEST_OBJS) $(LDFLAGS) $(TEST_LIBS)
-	./$(TEST)
+test: test_program
+	./test
+
+test_program: $(LIB) test.c
+	$(CC) $(CMOCKA_CFLAGS) $(TEST_CFLAGS) -o test test.c $(TEST_LDFLAGS) $(CMOCKA_LDFLAGS)
 
 # cleaning
 
-clean: $(TEST)_clean $(LIB)_clean
-
-$(TEST)_clean:
-	$(RM) $(TEST_OBJS) $(TEST)
-
-$(LIB)_clean:
+clean:
 	$(RM) $(LIB_OBJS) $(LIBS)
+	$(RM) test
 
 # conversion
 
