@@ -12,7 +12,9 @@ jobs:
     steps:
       - uses: actions/checkout@v2
       - name: Install dependencies
-        run: sudo apt install --no-install-recommends libcmocka-dev bmake
+        run: |
+          sudo apt install --no-install-recommends libcmocka-dev bmake
+          echo "CFLAGS=-fPIC" >> $GITHUB_ENV        
       - name: Build libuuid
         run: bmake
       - name: Run tests
