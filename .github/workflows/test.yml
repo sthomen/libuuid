@@ -12,7 +12,7 @@ jobs:
     steps:
       - uses: actions/checkout@v2
       - name: Install dependencies
-        run: sudo apt install cmocka
+        run: sudo apt install --no-install-recommends libcmocka-dev
       - name: Build libuuid
         run: make
       - name: Run tests
