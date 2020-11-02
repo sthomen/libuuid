@@ -12,8 +12,8 @@ jobs:
     steps:
       - uses: actions/checkout@v2
       - name: Install dependencies
-        run: sudo apt install --no-install-recommends libcmocka-dev
+        run: sudo apt install --no-install-recommends libcmocka-dev bmake
       - name: Build libuuid
-        run: make
+        run: bmake
       - name: Run tests
-        run: make test
+        run: bmake test
