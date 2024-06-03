@@ -1,0 +1,16 @@
+name: Run tests
+run-name: ${{ gitea.actor }} is running tests
+on: [push]
+
+jobs:
+  Test:
+    runs-on: self-hosted
+    steps:
+      - name: Install build dependencies
+        run: apk add --no-progress -t .testing nodejs gcc musl-dev cmocka-dev bmake
+      - name: Check out repository code
+        uses: actions/checkout@v4
+      - name: Compile and run tests
+        run: bmake CFLAGS="-Wall -pedantic -fPIC" test
+      - name: Clean up build depdendencies
+        run: apk del .testing
